@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You, Besties! 🌸</title>
+    <style>
+        /* --- RESET & BASIC STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body, html {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+            overflow-x: hidden; /* Prevent horizontal scroll for floating images */
+        }
+
+        /* --- BACKGROUND COLLAGE WITH PINK OVERLAY --- */
+        .bg-collage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Menyusun foto jadi 3 kolom otomatis */
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0;
+            filter: blur(10px); /* Efek blur biar ga ganggu teks utama */
+            transform: scale(1.08); /* Cegah garis putih di tepi layar akibat blur */
+            z-index: -2;
+            opacity: 0.45; /* Mengatur kepekatan foto (semakin kecil semakin transparan) */
+        }
+
+        .bg-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lapisan warna pink di atas kolase agar warna pinknya tetap dapet */
+        .bg-pink-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 229, 236, 0.75) 0%, rgba(255, 194, 209, 0.75) 50%, rgba(255, 179, 198, 0.75) 100%);
+            z-index: -1;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .main-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Stack panel and watermark vertically */
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Context for absolute floating stickers */
+            max-width: 800px; /* Center content, give room for stickers */
+        }
+
+        /* --- FLOATING STICKERS --- */
+        .floating-cat {
+            position: absolute;
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 20px; /* Mimic sticker cut */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
+            z-index: 10; /* Above the glass panel */
+        }
+
+        .cat-left {
+            top: 20px; /* Shifted down from 0px for better positioning */
+            left: -5px;
+            animation-delay: 0.5s;
+        }
+
+        .cat-right {
+            top: 20px; /* Shifted down from 0px for better positioning */
+            right: -5px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- THE PINK LIQUID GLASS PANEL --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55); 
+            border-radius: 30px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 35px rgba(255, 120, 150, 0.2);
+            
+            width: 100%;
+            max-width: 400px; /* Slightly wider for the text */
+            padding: 35px 20px;
+            text-align: center;
+            color: #4a3b42;
+            position: relative;
+            z-index: 5;
+            animation: containerAppear 0.8s ease-out;
+        }
+
+        /* --- STATUS BADGE --- */
+        .status-badge {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #ff5c8a;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 92, 138, 0.2);
+        }
+
+        /* --- HEADINGS & TEXT --- */
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            color: #ff477e;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #42353c;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* --- PREMIUM PINK BUTTON --- */
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff85a1 0%, #ff477e 100%);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 18px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 71, 126, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 10px;
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 71, 126, 0.4);
+        }
+
+        /* --- SECRET CONTENT (VIDEO & GALLERY) --- */
+        #secret-content {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .video-container {
+            margin: 20px 0;
+        }
+
+        video {
+            width: 100%;
+            max-width: 320px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(255, 71, 126, 0.15);
+        }
+
+        .gallery-title {
+            font-size: 1.1rem;
+            color: #ff477e;
+            margin: 30px 0 15px 0;
+            font-weight: 700;
+        }
+
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .grid-gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border: 3px solid white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Full width styling for photobox strips */
+        .strip-img {
+            grid-column: 1 / -1;
+            height: auto !important;
+            object-fit: contain !important;
+        }
+
+        /* --- CODE-STYLE FOOTER --- */
+        .code-footer {
+            margin-top: 35px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+            color: #8f7b83;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        /* --- WATERMARK FOOTER OUTSIDE PANEL --- */
+        .watermark-footer {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #ff477e;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes containerAppear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-collage">
+        <img src="unphotobox1.jpg" alt="BG 1">
+        <img src="unphotobox2.jpg" alt="BG 2">
+        <img src="unphotobox3.jpg" alt="BG 3">
+        <img src="unphotobox4.jpg" alt="BG 4">
+        <img src="photobox1.jpg" alt="BG 5">
+        <img src="photobox2.jpg" alt="BG 6">
+        <img src="photobox3.jpg" alt="BG 7">
+        <img src="unphotobox1.jpg" alt="BG 8"> <img src="unphotobox2.jpg" alt="BG 9">
+    </div>
+    <div class="bg-pink-overlay"></div>
+
+    <div class="main-container">
+        <img src="stiker1.jpg" alt="Left Sticker" class="floating-cat cat-left">
+        <img src="stiker2.jpg" alt="Right Sticker" class="floating-cat cat-right">
+
+        <div class="glass-panel">
+            <div class="status-badge">🌸 EVENT MEMORIES DEPLOYED</div>
+            
+            <h1>So Glad I Have You Guys! ✨</h1>
+            
+            <p>
+                Fr though, I just wanted to say a huge thank you for yesterday's event! It literally wouldn't have been that fun without you all. Thanks for making the vibes so unmatched!
+                <br><br>
+                And honestly, I'm so happy I got to network and make some amazing new friends along the way because of this. 
+                <br><br>
+                Good luck with college, guys! <b>Cheers to Semester 4!</b> 🥂 Hope everything goes smoothly, stay healthy, and keep being happy. We got this!
+                <br><br>
+                Anyway, here's a little recap of our memories. Tap below! 👇
+            </p>
+            
+            <button class="action-button" id="openVideoBtn" onclick="revealSurprise()">Open Memories 💝</button>
+
+            <div id="secret-content">
+                
+                <div class="video-container">
+                    <video id="myVideo" controls>
+                        <source src="jj.mp4" type="video/mp4">
+                        Oops, your browser doesn't support this video...
+                    </video>
+                </div>
+
+                <h2 class="gallery-title">💖 Captured Moments 💖</h2>
+                
+                <div class="grid-gallery">
+                    <img src="unphotobox1.jpg" alt="Memory 1">
+                    <img src="unphotobox2.jpg" alt="Memory 2">
+                    <img src="unphotobox3.jpg" alt="Memory 3">
+                    <img src="unphotobox4.jpg" alt="Memory 4">
+                    
+                    <img src="photobox1.jpg" class="strip-img" alt="Photobox Strip 1">
+                    <img src="photobox2.jpg" class="strip-img" alt="Photobox Strip 2">
+                    <img src="photobox3.jpg" class="strip-img" alt="Photobox Strip 3">
+                    <img src="photobox-result.jpg" class="strip-img" alt="Photobox Final Result">
+                </div>
+
+            </div>
+
+            <div class="code-footer">
+                > event_status: COMPLETED [SO MUCH FUN] 🎉<br>
+                > new_friends_unlocked: TRUE 🫶<br>
+                > semester_4_loading: 100% [GOOD LUCK] 💪<br>
+                > stay_healthy_and_happy: ALWAYS <3
+            </div>
+        </div>
+
+        <div class="watermark-footer">
+            🌸 Specially made for Maeya, Luluk, & April 💖
+        </div>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById("openVideoBtn").style.display = "none";
+            const content = document.getElementById("secret-content");
+            content.style.display = "block";
+            const video = document.getElementById("myVideo");
+            video.play();
+        }
+    </script>
+</body>
+</html>
