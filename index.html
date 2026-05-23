@@ -15,46 +15,13 @@
 
         body, html {
             min-height: 100vh;
-            position: relative;
+            /* Aesthetic pink gradient background */
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px 10px;
             overflow-x: hidden; /* Prevent horizontal scroll for floating images */
-        }
-
-        /* --- BACKGROUND COLLAGE WITH PINK OVERLAY --- */
-        .bg-collage {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Menyusun foto jadi 3 kolom otomatis */
-            grid-template-rows: repeat(3, 1fr);
-            gap: 0;
-            filter: blur(10px); /* Efek blur biar ga ganggu teks utama */
-            transform: scale(1.08); /* Cegah garis putih di tepi layar akibat blur */
-            z-index: -2;
-            opacity: 0.45; /* Mengatur kepekatan foto (semakin kecil semakin transparan) */
-        }
-
-        .bg-collage img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Lapisan warna pink di atas kolase agar warna pinknya tetap dapet */
-        .bg-pink-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 229, 236, 0.75) 0%, rgba(255, 194, 209, 0.75) 50%, rgba(255, 179, 198, 0.75) 100%);
-            z-index: -1;
         }
 
         /* --- MAIN CONTAINER --- */
@@ -98,12 +65,12 @@
 
         /* --- THE PINK LIQUID GLASS PANEL --- */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.55); 
+            background: rgba(255, 255, 255, 0.45); 
             border-radius: 30px;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 15px 35px rgba(255, 120, 150, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(255, 120, 150, 0.15);
             
             width: 100%;
             max-width: 400px; /* Slightly wider for the text */
@@ -117,7 +84,7 @@
 
         /* --- STATUS BADGE --- */
         .status-badge {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.7);
             color: #ff5c8a;
             padding: 6px 16px;
             border-radius: 20px;
@@ -135,15 +102,14 @@
             margin-bottom: 15px;
             font-weight: 800;
             color: #ff477e;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
         }
 
         p {
             font-size: 0.95rem;
-            color: #42353c;
+            color: #5c4d54;
             line-height: 1.6;
             margin-bottom: 25px;
-            font-weight: 500;
         }
 
         /* --- PREMIUM PINK BUTTON --- */
@@ -227,8 +193,8 @@
             margin-top: 35px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.75rem;
-            color: #8f7b83;
-            background: rgba(255, 255, 255, 0.5);
+            color: #a38f97;
+            background: rgba(255, 255, 255, 0.35);
             padding: 12px;
             border-radius: 12px;
             text-align: left;
@@ -237,18 +203,27 @@
 
         /* --- WATERMARK FOOTER OUTSIDE PANEL --- */
         .watermark-footer {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: #ff477e;
-            font-weight: 700;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #ff6584;
+            font-weight: 600;
             letter-spacing: 1px;
             text-align: center;
             text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
             display: flex;
             align-items: center;
             gap: 8px;
             animation: fadeIn 1.2s ease forwards;
+        }
+
+        /* --- COPYRIGHT STYLE --- */
+        .copyright-text {
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: #bfa3ae;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         /* --- ANIMATIONS --- */
@@ -263,18 +238,6 @@
     </style>
 </head>
 <body>
-
-    <div class="bg-collage">
-        <img src="unphotobox1.jpg" alt="BG 1">
-        <img src="unphotobox2.jpg" alt="BG 2">
-        <img src="unphotobox3.jpg" alt="BG 3">
-        <img src="unphotobox4.jpg" alt="BG 4">
-        <img src="photobox1.jpg" alt="BG 5">
-        <img src="photobox2.jpg" alt="BG 6">
-        <img src="photobox3.jpg" alt="BG 7">
-        <img src="unphotobox1.jpg" alt="BG 8"> <img src="unphotobox2.jpg" alt="BG 9">
-    </div>
-    <div class="bg-pink-overlay"></div>
 
     <div class="main-container">
         <img src="stiker1.jpg" alt="Left Sticker" class="floating-cat cat-left">
@@ -332,6 +295,10 @@
 
         <div class="watermark-footer">
             🌸 Specially made for Maeya, Luluk, & April 💖
+        </div>
+
+        <div class="copyright-text">
+            Olive &copy; 2026
         </div>
     </div>
 
