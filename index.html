@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You, Besties! 🌸</title>
+    <title>Cihuyy! 🌸</title>
     <style>
         /* --- RESET & BASIC STYLES --- */
         * {
@@ -20,8 +20,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 10px;
+            padding: 40px 15px; /* Ditambah padding atas biar panel gak terlalu mepet layar atas */
             overflow-x: hidden; /* Prevent horizontal scroll for floating images */
+            position: relative; /* Context untuk stiker yang dipindah ke body */
         }
 
         /* --- MAIN CONTAINER --- */
@@ -31,36 +32,35 @@
             flex-direction: column; /* Stack panel and watermark vertically */
             justify-content: center;
             align-items: center;
-            position: relative; /* Context for absolute floating stickers */
-            max-width: 800px; /* Center content, give room for stickers */
+            max-width: 400px; /* Disesuaikan dengan lebar maksimal panel kaca */
         }
 
-        /* --- FLOATING STICKERS --- */
+        /* --- FLOATING STICKERS (FIXED POSITION) --- */
         .floating-cat {
-            position: absolute;
-            width: 100px; /* Adjust size as needed */
+            position: fixed; /* Diubah ke fixed agar tetap di posisinya di background luar */
+            width: 75px; /* Sedikit dikecilkan agar pas melayang di background HP */
             height: auto;
-            border-radius: 20px; /* Mimic sticker cut */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.12)); 
             animation: float 4s ease-in-out infinite;
-            z-index: 10; /* Above the glass panel */
+            z-index: 1; /* Di bawah panel kaca (z-index: 5) tapi di atas background */
+            background: transparent;
         }
 
         .cat-left {
-            top: -5px; 
-            left: -5px;
+            top: 15px; 
+            left: 10px;
             animation-delay: 0.5s;
         }
 
         .cat-right {
-            top: -5px; 
-            right: -5px;
+            top: 15px; 
+            right: 10px;
             animation-delay: 1.5s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
         }
 
         /* --- THE PINK LIQUID GLASS PANEL --- */
@@ -73,12 +73,11 @@
             box-shadow: 0 15px 35px rgba(255, 120, 150, 0.15);
             
             width: 100%;
-            max-width: 400px; /* Slightly wider for the text */
             padding: 35px 20px;
             text-align: center;
             color: #4a3b42;
             position: relative;
-            z-index: 5;
+            z-index: 5; /* Tetap di atas stiker agar teks aman terbaca */
             animation: containerAppear 0.8s ease-out;
         }
 
@@ -239,10 +238,10 @@
 </head>
 <body>
 
-    <div class="main-container">
-        <img src="stiker1.png" alt="Left Sticker" class="floating-cat cat-left">
-        <img src="stiker2.png" alt="Right Sticker" class="floating-cat cat-right">
+    <img src="stiker1.png" alt="Left Sticker" class="floating-cat cat-left">
+    <img src="stiker2.png" alt="Right Sticker" class="floating-cat cat-right">
 
+    <div class="main-container">
         <div class="glass-panel">
             <div class="status-badge">🌸 EVENT MEMORIES DEPLOYED</div>
             
@@ -289,7 +288,7 @@
                 > event_status: COMPLETED [SO MUCH FUN] 🎉<br>
                 > new_friends_unlocked: TRUE 🫶<br>
                 > semester_4_loading: 100% [GOOD LUCK] 💪<br>
-                > stay_healthy_and_happy: ALWAYS <3
+                > stay_healthy_and_happy: ALWAYS &lt;3
             </div>
         </div>
 
